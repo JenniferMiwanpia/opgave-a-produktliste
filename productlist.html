@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produkter | Fashion</title>
+    <link rel="stylesheet" href="productlist.css" />
+    <script src="productlist.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Spring til indhold</a>
+    <header class="site-header">
+      <a class="logo" href="productlist.html">jennifers sportsbutik<span>.</span></a>
+      <nav aria-label="Hovedmenu"><a href="productlist.html" aria-current="page">Alle produkter</a></nav>
+    </header>
+    <main id="main">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Tasker · Kasketter · Accessories</p>
+        <h1 id="page-title">find din næste<br /><span>favorit.</span></h1>
+        <p>Gå på opdagelse i vores udvalg af accessories.</p>
+      </section>
+      <section aria-labelledby="collection-title">
+        <div class="collection-header"><h2 id="collection-title">Alle produkter</h2></div>
+        <p id="status" role="status">Henter produkter …</p>
+        <noscript>Slå JavaScript til for at se produktlisten.</noscript>
+        <button id="retry" type="button" hidden>Prøv igen</button>
+        <div class="product-grid" id="product-list" aria-busy="true"></div>
+      </section>
+    </main>
+    <template id="product-template">
+      <article class="product-card">
+        <a class="product-link" href="productdetails.html">
+          <div class="product-image">
+            <img alt="" width="640" height="854" loading="lazy" />
+            <span class="image-fallback" hidden>Billede mangler</span>
+          </div>
+          <p class="product-brand"></p>
+          <h3 class="product-name"></h3>
+          <div class="product-bottom">
+            <p class="product-price"></p>
+            <span class="product-cta">Se produkt <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      </article>
+    </template>
+    <footer>
+      <a class="logo" href="productlist.html">jennifers sportsbutik<span>.</span></a>
+      <p>Fashion · Sport og hverdag</p>
+    </footer>
+  </body>
+</html>
