@@ -5,6 +5,36 @@ const statusMessage = document.querySelector("#status");
 const retryButton = document.querySelector("#retry");
 const productCard = document.querySelector("#product");
 
+const colours = {
+  "Silver-Black": "sølvfarvet og sort",
+  "Blue-Black": "blå og sort",
+  "Navy Blue": "mørkeblå",
+  "Marine Blue": "mørkeblå",
+  Black: "sort",
+  Blue: "blå",
+  Red: "rød",
+  Orange: "orange",
+  Green: "grøn",
+  Pink: "pink",
+  Grey: "grå",
+  Purple: "lilla",
+  Beige: "beige",
+  Brown: "brun",
+};
+const types = {
+  Backpacks: "rygsæk",
+  Caps: "kasket",
+  "Water Bottle": "drikkedunk",
+  Handbags: "taske",
+};
+const materials = {
+  polyester: "polyester",
+  nylon: "nylon",
+  polyamide: "polyamid",
+  silicone: "silikone",
+  cotton: "bomuld",
+};
+
 retryButton.addEventListener("click", getProduct);
 getProduct();
 
@@ -47,6 +77,11 @@ async function getProduct() {
 
 // Sætter oplysningerne ind i de tomme felter i HTML'en.
 function showProduct(product) {
+  const name = product.productdisplayname.toLowerCase();
+  const colourKey = Object.keys(colours).find((key) => name.includes(key.toLowerCase())) || product.basecolour;
+  const colour = colours[colourKey] || product.basecolour || "";
+  const type = name.includes("swimming cap") ? "badehætte" : types[product.articletype] || product.articletype || "produkt";
+
   document.title = product.productdisplayname + " | Jennifers sportsbutik";
   document.querySelector("#brand").textContent = product.brandname || "";
   document.querySelector("#product-name").textContent = product.productdisplayname;
@@ -55,18 +90,20 @@ function showProduct(product) {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
-  document.querySelector("#type").textContent = product.articletype || "–";
-  document.querySelector("#colour").textContent = product.basecolour || "–";
-  document.querySelector("#gender").textContent = product.gender || "–";
+  document.querySelector("#type").textContent = type;
+  document.querySelector("#colour").textContent = colour ? colour[0].toUpperCase() + colour.slice(1) : "–";
+  document.querySelector("#gender").textContent = { Men: "Herre", Women: "Dame" }[product.gender] || product.gender || "–";
   document.querySelector("#product-id").textContent = product.id;
 
-  // Jeg viser kun første punkt eller sætning fra API'ets beskrivelse.
-  const description = new DOMParser()
-    .parseFromString(product.description || "", "text/html")
-    .body.textContent.replace(/\s+/g, " ").trim();
-  const shortDescription = description.replace(/^1\.\s*/, "").split(/\s*[2-9]\.\s*|[.!?]\s+/)[0].trim();
-  document.querySelector("#description").textContent = shortDescription;
-  document.querySelector("#description-section").hidden = !shortDescription;
+  // Kun farve, type og eventuelt et materiale, der faktisk står i API'et.
+  const materialText = ((product.materialcaredesc || "") + " " + (product.description || "")).toLowerCase();
+  const foundMaterials = Object.keys(materials)
+    .filter((key) => materialText.includes(key))
+    .map((key) => materials[key]);
+  const shortText = [colour, type].filter(Boolean).join(" ");
+  const material = foundMaterials.length ? " · " + foundMaterials.slice(0, 2).join(" og ") : "";
+  document.querySelector("#description").textContent = shortText[0].toUpperCase() + shortText.slice(1) + material;
+  document.querySelector("#description-section").hidden = false;
 
   const image = document.querySelector("#product-image");
   const fallback = document.querySelector("#image-fallback");
