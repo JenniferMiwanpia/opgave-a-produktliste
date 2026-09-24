@@ -1,7 +1,8 @@
-# Opgave A – Jennifers sportsbutik
+# Jennifers sportsbutik – opgave A og B
 
-Dynamisk produktliste med HTML, CSS og JavaScript.
+Åbn productlist.html med Live Server, eller brug GitHub Pages-linket til projektet. Internet kræves til produktdata og billeder fra https://kea-alt-del.dk/t7/.
 
-Produktdata: https://kea-alt-del.dk/t7/api/products?category=Accessories&limit=30
+- Opgave A: productlist.html, productlist.js og productlist.css viser en dynamisk liste med accessories.
+- Opgave B: productdetails.html, productdetails.js og productdetails.css viser det produkt, man klikker på i listen. Produktets id sendes i URL'en og bruges til at hente ét produkt fra API'et.
 
-Åbn productlist.html med Live Server. Produktdetaljesiden er tom og laves senere.
+Hvis et produkt ikke kan hentes, vises en fejlbesked og en Prøv igen-knap. Åbnes detaljesiden uden id, henviser den tilbage til produktlisten.

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produktdetaljer | Jennifers sportsbutik</title>
+    <link rel="stylesheet" href="productdetails.css" />
+    <script src="productdetails.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Spring til indhold</a>
+    <header class="site-header">
+      <a class="logo" href="productlist.html">jennifers sportsbutik<span>.</span></a>
+      <nav aria-label="Hovedmenu"><a href="productlist.html">Alle produkter</a></nav>
+    </header>
+
+    <main id="main">
+      <a class="back-link" href="productlist.html">← Tilbage til produkterne</a>
+      <p id="status" role="status">Henter produkt …</p>
+      <button id="retry" type="button" hidden>Prøv igen</button>
+
+      <article id="product" class="detail-grid" hidden>
+        <div class="product-image">
+          <img id="product-image" alt="" width="640" height="854" />
+          <span id="image-fallback" hidden>Billede mangler</span>
+        </div>
+        <div class="detail-info">
+          <p id="brand" class="eyebrow"></p>
+          <h1 id="product-name"></h1>
+          <p id="price" class="price"></p>
+          <dl>
+            <div><dt>Type</dt><dd id="type"></dd></div>
+            <div><dt>Farve</dt><dd id="colour"></dd></div>
+            <div><dt>Køn</dt><dd id="gender"></dd></div>
+            <div><dt>Produktnummer</dt><dd id="product-id"></dd></div>
+          </dl>
+          <section id="description-section" hidden>
+            <h2>Om produktet</h2>
+            <p id="description"></p>
+          </section>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <a class="logo" href="productlist.html">jennifers sportsbutik<span>.</span></a>
+      <p>Fashion · Sport og hverdag</p>
+    </footer>
+  </body>
+</html>

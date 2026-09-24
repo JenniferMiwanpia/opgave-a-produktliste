@@ -1,0 +1,60 @@
+@import url("productlist.css");
+
+.back-link {
+  display: inline-block;
+  margin: 32px 0;
+  font-size: 14px;
+  text-underline-offset: 4px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 48px;
+}
+
+.detail-info h1 {
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  overflow-wrap: anywhere;
+}
+
+.price {
+  font-size: 22px;
+  margin: 24px 0;
+}
+
+dl {
+  margin: 32px 0;
+}
+
+dl > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  border-top: 1px solid #d9dbd2;
+  padding: 12px 0;
+}
+
+dt {
+  color: #60645b;
+}
+
+dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+#description {
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+@media (max-width: 700px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
