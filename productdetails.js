@@ -1,3 +1,4 @@
+// Produktlisten sender id'et med i linket, fx productdetails.html?id=1535.
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const statusMessage = document.querySelector("#status");
@@ -7,8 +8,9 @@ const productCard = document.querySelector("#product");
 retryButton.addEventListener("click", getProduct);
 getProduct();
 
-// henter det produkt, der blev klikket på i produktlisten
+// Henter ét produkt ud fra id'et i adressen.
 async function getProduct() {
+  // Hvis der mangler et gyldigt id, kan siden ikke vide, hvilket produkt den skal vise.
   if (!id || !/^\d+$/.test(id)) {
     statusMessage.textContent = "Vælg et produkt fra produktlisten.";
     return;
@@ -19,6 +21,7 @@ async function getProduct() {
   statusMessage.textContent = "Henter produkt …";
 
   try {
+    // API'et giver oplysningerne om det valgte produkt.
     const response = await fetch("https://kea-alt-del.dk/t7/api/products/" + id, {
       signal: AbortSignal.timeout(20000),
     });
@@ -42,7 +45,7 @@ async function getProduct() {
   }
 }
 
-// sætter produktets oplysninger ind på siden
+// Sætter oplysningerne ind i de tomme felter i HTML'en.
 function showProduct(product) {
   document.title = product.productdisplayname + " | Jennifers sportsbutik";
   document.querySelector("#brand").textContent = product.brandname || "";
@@ -57,7 +60,7 @@ function showProduct(product) {
   document.querySelector("#gender").textContent = product.gender || "–";
   document.querySelector("#product-id").textContent = product.id;
 
-  // API'et kan sende HTML i beskrivelsen, så vi viser kun teksten
+  // Beskrivelsen fra API'et kan indeholde HTML; her tager jeg kun teksten.
   const description = new DOMParser()
     .parseFromString(product.description || "", "text/html")
     .body.textContent.trim();
@@ -69,6 +72,7 @@ function showProduct(product) {
   image.hidden = false;
   fallback.hidden = true;
   image.alt = product.productdisplayname;
+  // Hvis billedet mangler, vises en kort besked i stedet.
   image.onerror = () => {
     image.hidden = true;
     fallback.hidden = false;

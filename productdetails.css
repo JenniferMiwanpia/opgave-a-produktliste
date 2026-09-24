@@ -1,3 +1,4 @@
+/* Jeg bruger de samme grundfarver og fonte som på produktlisten. */
 @import url("productlist.css");
 
 .back-link {
@@ -7,6 +8,7 @@
   text-underline-offset: 4px;
 }
 
+/* Billede og tekst står ved siden af hinanden på en stor skærm. */
 .detail-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -52,6 +54,7 @@ dd {
   white-space: pre-line;
 }
 
+/* På en smal skærm kommer teksten ned under billedet. */
 @media (max-width: 700px) {
   .detail-grid {
     grid-template-columns: 1fr;
