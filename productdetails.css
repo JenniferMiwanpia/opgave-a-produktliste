@@ -16,6 +16,10 @@
   gap: 48px;
 }
 
+.detail-info {
+  min-width: 0;
+}
+
 .detail-info h1 {
   font-size: clamp(30px, 4vw, 52px);
   line-height: 1.1;
@@ -51,7 +55,9 @@ dd {
 
 #description {
   line-height: 1.6;
-  white-space: pre-line;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* På en smal skærm kommer teksten ned under billedet. */

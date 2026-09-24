@@ -60,12 +60,13 @@ function showProduct(product) {
   document.querySelector("#gender").textContent = product.gender || "–";
   document.querySelector("#product-id").textContent = product.id;
 
-  // Beskrivelsen fra API'et kan indeholde HTML; her tager jeg kun teksten.
+  // Jeg viser kun første punkt eller sætning fra API'ets beskrivelse.
   const description = new DOMParser()
     .parseFromString(product.description || "", "text/html")
-    .body.textContent.trim();
-  document.querySelector("#description").textContent = description;
-  document.querySelector("#description-section").hidden = !description;
+    .body.textContent.replace(/\s+/g, " ").trim();
+  const shortDescription = description.replace(/^1\.\s*/, "").split(/\s*[2-9]\.\s*|[.!?]\s+/)[0].trim();
+  document.querySelector("#description").textContent = shortDescription;
+  document.querySelector("#description-section").hidden = !shortDescription;
 
   const image = document.querySelector("#product-image");
   const fallback = document.querySelector("#image-fallback");
